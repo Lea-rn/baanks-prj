@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- ///header ///// -->
+    <header>
+      <h3 class="welcome">Log in to get started</h3>
+      <img height="50px" src="./logo.png" alt="" />
+      <div class="auth-header">
+        <input class="user" placeholder="USER" type="text" />
+        <input class="pin" placeholder="PIN" type="number" />
+        <span class="btn-login"
+          ><i class="fa-solid fa-arrow-right-long"></i
+        ></span>
+      </div>
+    </header>
+
+    <main>
+      <!-- ///// main header -->
+      <section class="main-header">
+        <div class="current">
+          <h3>Current balance</h3>
+          <p>as of 2/22/2026</p>
+        </div>
+
+        <h1 class="amount">0000 <i class="fa-solid fa-euro-sign"></i></h1>
+      </section>
+
+      <!-- /////// mouvements ///// -->
+
+      <section class="mouvements-container">
+        <!-- ////// left -->
+        <section class="left">
+          <div class="deposit-container">
+            <div class="deposit-info">
+              <span class="deposit"> 2 deposit</span>
+              <span>3 DAYS AGO</span>
+            </div>
+
+            <p class="deposit-amount">
+              4000 <i class="fa-solid fa-euro-sign"></i>
+            </p>
+          </div>
+
+          <div class="withdraw-container">
+            <div class="withdraw-info">
+              <span class="withdraw"> 1 withdraw</span>
+              <span>2/22/2026</span>
+            </div>
+
+            <p class="withdraw-amount">
+              -378 <i class="fa-solid fa-euro-sign"></i>
+            </p>
+          </div>
+
+         
+
+         
+        </section>
+
+        <!-- /////// right // -->
+        <section class="right">
+             <form  class="transfert-box">
+                <h3>Transfert money</h3>
+                <input class="transfert-input" type="text"/>
+                <label class="transfert-to"> Transfert to</label>
+                <input class="amount-transfert-box-input" type="number"/>
+                <label class="amount-transfert-label">Amount</label>
+                <button class="btn-transfert-box"><i class="fa-solid fa-arrow-right-long"></i
+        ></button>
+             </form>
+
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: rgb(226, 225, 224);
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-header input {
+  border-radius: 20px;
+  width: 30%;
+  text-align: center;
+  border: none;
+  padding: 10px;
+}
+
+.btn-login {
+  cursor: pointer;
+}
+
+.welcome {
+  margin-left: 50px;
+}
+
+/* ////// main header /// */
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: 50px auto;
+}
+
+/* ////////////// movements /// */
+
+.mouvements-container {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 100px;
+}
+
+/* ////////// left  */
+
+.left {
+  width: 48%;
+  height: 500px;
+  overflow: scroll;
+  background-color: white;
+}
+
+.deposit-container,
+.withdraw-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 15px;
+  border-bottom: solid 1px gray;
+}
+
+.deposit,
+.withdraw {
+  border-radius: 10px;
+  padding: 0px 5px;
+  color: white;
+  padding: 1px 3px;
+}
+
+.withdraw {
+  background: linear-gradient(to bottom right, #7ed481, #3ea343);
+}
+.deposit {
+  background: linear-gradient(to bottom right, #e35858, #ba3f3f);
+}
+
+/* //////////////////// right */
+
+.right {
+  width: 48%;
+  height: 600px;
+}
+
+/* ///////// transfert-box */
+
+.transfert-box {
+  padding: 20px 40px;
+  border-radius: 10px;
+  height: 150px;
+  position: relative;
+  background: linear-gradient(to right bottom, #ffc107, #ff9800);
+}
+
+.transfert-input,
+.transfert-to,
+.amount-transfert-box-input,
+.amount-transfert-label,
+.btn-transfert-box {
+  position: absolute;
+}
+
+
+.amount-transfert-box-input{
+    left: 250px;
+    background-color: rgba(255, 255, 255, 0.367);
+    width: 30%;
+    border-radius: 10px;
+    text-align: center;
+    padding: 8px 0px;
+    border: none;
+}
+
+
+
+.btn-transfert-box{
+    left: 450px;
+    border: transparent;
+    border-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.transfert-to{
+    top: 120px;
+    left: 70px;
+}
+
+.amount-transfert-label{
+    top: 120px;
+    left: 300px;
+}
+
+
+.transfert-input{
+       background-color: rgba(255, 255, 255, 0.367);
+    width: 30%;
+    border-radius: 10px;
+    text-align: center;
+    padding: 8px 0px;
+    border: none;
+}
