@@ -52,7 +52,7 @@ header {
 
 .left {
   width: 48%;
-  height: 500px;
+  height: 550px;
   overflow: scroll;
   background-color: white;
 }
@@ -76,17 +76,19 @@ header {
 }
 
 .withdraw {
-  background: linear-gradient(to bottom right, #7ed481, #3ea343);
+
+    background: linear-gradient(to bottom right, #e35858, #ba3f3f);
 }
 .deposit {
-  background: linear-gradient(to bottom right, #e35858, #ba3f3f);
+
+    background: linear-gradient(to bottom right, #7ed481, #3ea343);
 }
 
 /* //////////////////// right */
 
 .right {
   width: 48%;
-  height: 600px;
+  height: 510px;
 }
 
 /* ///////// transfert-box */
@@ -94,23 +96,31 @@ header {
 .transfert-box {
   padding: 20px 40px;
   border-radius: 10px;
-  height: 150px;
+  /* height: 150px; */
+  height: 25%;
   position: relative;
   background: linear-gradient(to right bottom, #ffc107, #ff9800);
 }
 
 .transfert-input,
+.close-input,
+.confirm-label,
+.amount-transfert-box-input,
+.pin-label,
+.pin-input,
+.btn-close-box,
 .transfert-to,
 .amount-transfert-box-input,
 .amount-transfert-label,
-.btn-transfert-box {
+.btn-transfert-box ,
+.btn-loan-box {
   position: absolute;
 }
 
 
-.amount-transfert-box-input{
+.amount-transfert-box-input , .pin-input{
     left: 250px;
-    background-color: rgba(255, 255, 255, 0.367);
+ background-color: rgba(255, 255, 255, 0.367);
     width: 30%;
     border-radius: 10px;
     text-align: center;
@@ -120,7 +130,7 @@ header {
 
 
 
-.btn-transfert-box{
+.btn-transfert-box ,.btn-close-box{
     left: 450px;
     border: transparent;
     border-radius: 5px;
@@ -128,22 +138,95 @@ header {
     cursor: pointer;
 }
 
-.transfert-to{
+.transfert-to ,.amount-loan-label ,.confirm-label {
     top: 120px;
     left: 70px;
+    position: absolute;
 }
 
-.amount-transfert-label{
+.amount-transfert-label {
     top: 120px;
     left: 300px;
 }
 
+.pin-label{
+      top: 120px;
+    left: 290px;
+}
 
-.transfert-input{
+
+.transfert-input , .amount-loan-box-input , .close-input {
        background-color: rgba(255, 255, 255, 0.367);
     width: 30%;
     border-radius: 10px;
     text-align: center;
     padding: 8px 0px;
     border: none;
+}
+/* ///////////// loan box */
+
+.loan-box{
+    padding: 20px 40px;
+  border-radius: 10px;
+  /* height: 150px; */
+     height: 25%;
+  position: relative;
+  background: linear-gradient(to right bottom, #59c45d, #48964c);
+  margin: 20px 0px;
+}
+
+.btn-loan-box{
+      left: 200px;
+    border: transparent;
+    border-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+/* /////////// close-box : */
+
+.close-box{
+    padding: 20px 40px;
+  border-radius: 10px;
+  /* height: 150px; */
+   height: 25%;
+  position: relative;
+  background: linear-gradient(to right bottom, #e35858, #ba3f3f);
+
+}
+
+
+/* ///// footer */
+footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.average-in ,.average-out ,.average-interest{
+  font-size: 20px;
+}
+
+.average-in{
+  color: #3ea343;
+}
+
+.average-out{
+  color: #ba3f3f;
+}
+.average-interest{
+    color: #3ea343;
+}
+
+.sort{
+  cursor: pointer;
+  margin-right: 200px;
+}
+
+.logout-timer{
+  font-weight: 600;
 }
