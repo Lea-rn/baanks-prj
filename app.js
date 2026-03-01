@@ -41,6 +41,10 @@ const accounts = [account1, account2, account3, account4 ];
 const movementsContainer = document.querySelector(".left");
 const balance = document.querySelector(".amount") ; 
 
+const inCome = document.querySelector(".average-in") ;
+const outCome = document.querySelector(".average-out") ;
+const int = document.querySelector(".average-interest")
+
 
 /////// display movements :::
 const dipalyMovements = function (arr) {
@@ -107,7 +111,42 @@ console.log(accounts)
 
 
 
+//////// display summary :: 
 
+const calcDispalySummary = function (accountMovement){
+
+  //// income
+const inc = accountMovement.filter((ele)=> ele >0).reduce((acc,ele)=> acc + ele ,0) ; 
+////// update ui ::: 
+inCome.textContent = `${inc} € `
+
+///// outcome 
+const outc = accountMovement.filter((ele)=> ele < 0).reduce((acc,ele)=> acc + ele ,0) ; 
+outCome.textContent = `${Math.abs(outc)} €` ;
+
+///// interest :::
+
+// [5000, 3400, -150, -790, -3210, 1000, 8500, -30],
+
+const intereset = accountMovement.filter((ele)=> ele > 0) //// [5000,3400,1000,8500]
+.map((deposit , i , arr)=>{
+console.log("comes from filter : " , arr)
+return (deposit*1.5)/100
+} ).reduce((acc,ele , i , arr )=>{
+  console.log("comes from map",arr)
+return  ele + acc
+} ,0)
+
+////// update ui :
+
+int.textContent = `${intereset} €`
+
+
+}
+
+
+
+calcDispalySummary(account2.movements)
 
 
 
