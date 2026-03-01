@@ -5,6 +5,8 @@ const account1 = {
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2,
   pin: 1111,
+  
+
 };
 
 const account2 = {
@@ -28,16 +30,21 @@ const account4 = {
   pin: 4444,
 };
 
-const accounts = [account1, account2, account3, account4];
+
+
+const accounts = [account1, account2, account3, account4 ];
 
 // console.log(accounts);
 
 ////// import elements :::
 
 const movementsContainer = document.querySelector(".left");
+const balance = document.querySelector(".amount") ; 
 
+
+/////// display movements :::
 const dipalyMovements = function (arr) {
-  movementsContainer.innerHTML = "";    
+  movementsContainer.innerHTML = "";
   arr.forEach((mov, i) => {
     let type = mov > 0 ? "deposit" : "withdraw";
 
@@ -57,9 +64,57 @@ const dipalyMovements = function (arr) {
   });
 };
 
-//  [5000, 3400, -150, -790, -3210, 1000, 8500, -30],
+
 
 dipalyMovements(account2.movements);
+
+
+
+////// display balance ::: 
+
+
+const dispalyBalance = function(arr){
+ const result  = arr.reduce((acc,ele)=> acc+ele , 0) ; 
+ ///// update ui ::
+ balance.textContent =  `${result} €` 
+
+}
+
+
+dispalyBalance(account2.movements)
+
+
+
+//////// userName functionnality :: 
+
+
+const displayUsername = function (arr){
+arr.forEach((person)=> person.userName = person.owner
+.toLowerCase().split(" ").map((ele)=> ele[0]).join("")
+)
+}
+
+displayUsername(accounts)
+console.log(accounts)
+
+
+// const user = "MOHAMED JLASSI" ;   ////// mJ 
+
+//                  ///mohamed jlassi
+// const userName = user.toLowerCase().split(" ").map((ele)=> ele[0]).join("")
+// console.log(userName)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -93,13 +148,11 @@ dipalyMovements(account2.movements);
 
 ////////////////// lecture :::
 
+////////// section ::: data transformation :::
 
-
-////////// section ::: data transformation ::: 
-
-///// with forEach : 
+///// with forEach :
 // const arr = [3,1,4,3,2] ;
-// console.log(arr) ; 
+// console.log(arr) ;
 
 // const result = [] ;   ////
 
@@ -107,7 +160,7 @@ dipalyMovements(account2.movements);
 
 // console.log(result)
 
-///// with map : 
+///// with map :
 //  const arr = [3,1,4,3,2] ;
 //  console.log(arr)
 
@@ -121,43 +174,38 @@ dipalyMovements(account2.movements);
 //    return ele * 2 ;
 // })
 
-
-///// second exemple :: 
+///// second exemple ::
 // const euro = [100,50,10,24]  ;
-// console.log("euro" , euro) ; 
+// console.log("euro" , euro) ;
 
-// const toTunisianDinar = 3.3 ; 
+// const toTunisianDinar = 3.3 ;
 
 // const dinar = euro.map((money )=> money*toTunisianDinar)
 
 // console.log("dinar" , dinar)
 
-///// with forEach :  
-
+///// with forEach :
 
 // const euro = [100,50,10,24]  ;
 // console.log("euro" , euro) ;
-// const toTunisianDinar = 3.3 ; 
-// const dinar = [] ; 
+// const toTunisianDinar = 3.3 ;
+// const dinar = [] ;
 
 // euro.forEach((money)=> dinar.push(money*toTunisianDinar))
 
 //  console.log("dinar" , dinar)
 
-
-
-
-// const user = "Park Thomas Williams"      //// goal ===> ptw 
+// const user = "Park Thomas Williams"      //// goal ===> ptw
 // console.log(user)
 
 // const userName = user.toLowerCase() ;  ///// Park Thomas Williams
 
 // console.log(userName)
 
-// const userName1 = userName.split(" ")  ////// ['park', 'thomas', 'williams'] 
+// const userName1 = userName.split(" ")  ////// ['park', 'thomas', 'williams']
 // console.log(userName1)
 
-// const userName2 = userName1.map((nom)=> nom[0]) ///// ["p" , "t" , "w"] ; 
+// const userName2 = userName1.map((nom)=> nom[0]) ///// ["p" , "t" , "w"] ;
 
 // console.log(userName2)
 
@@ -170,16 +218,14 @@ dipalyMovements(account2.movements);
 // const result = user.toLowerCase().split(" ").map((nom)=> nom[0]).join("")
 // console.log(result)
 
-
-
 /////// filter :::
 
-// const x = [3,1,4,3,2] ; 
+// const x = [3,1,4,3,2] ;
 // console.log(x)
 
 // ///// with forEach :
 
-// const numbersGreaterThanTwo = [] ; 
+// const numbersGreaterThanTwo = [] ;
 // x.forEach((num)=> {
 //   if (num > 2){
 //     numbersGreaterThanTwo.push(num)
@@ -188,23 +234,19 @@ dipalyMovements(account2.movements);
 
 // console.log(numbersGreaterThanTwo)
 
+////// with filter :::
 
-////// with filter ::: 
-
-// const x = [3,1,4,3,2] ; 
+// const x = [3,1,4,3,2] ;
 // console.log(x)
 
 // const numbersGreaterThanTwo = x.filter((ele)=> ele > 2)
 
 // console.log(numbersGreaterThanTwo)
 
-
 ///////////// reduce ::
 
-
-// const x = [3,1,4,3,2] ; 
+// const x = [3,1,4,3,2] ;
 // console.log(x)
-
 
 ///// with forEach ::
 
@@ -214,12 +256,11 @@ dipalyMovements(account2.movements);
 
 // console.log(sum)
 
-
-////// with reduce :: 
-// const x = [3,1,4,3,2] ; 
+////// with reduce ::
+// const x = [3,1,4,3,2] ;
 // console.log(x)
 
-// const sum = x.reduce((acc,ele)=> acc+ele , 0) ; 
+// const sum = x.reduce((acc,ele)=> acc+ele , 0) ;
 // console.log(sum)
 
 ////// exemple 2 :
@@ -230,7 +271,7 @@ dipalyMovements(account2.movements);
 // const multiple = x.reduce((acc,num)=> num*acc  ,1)
 // console.log(multiple)
 
-/////// exemple 3 : 
+/////// exemple 3 :
 
 // const y = [50,300,1000,200,2000,20]  ;
 // console.log(y)
@@ -245,14 +286,71 @@ dipalyMovements(account2.movements);
 
 // console.log(max)
 
+// const account = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// console.log(account);
 
-
-const account = [200, 450, -400, 3000, -650, -130, 70, 1300] ;
-
-/////// sum of deposit on tunisian dinar ... 
+// const toTunisianDinar = 3.3;
+/////// sum of deposit on tunisian dinar ...
 
 ////// filter / map / reduce ....
 
+// const step1 = account.map((ele)=> ele*toTunisianDinar)
+
+// console.log(step1)
+
+// const step2 = step1.filter((ele)=> ele > 0) ;
+// console.log(step2)  ////[660, 1485, 9900, 231, 4290]
+
+// const step3 = step2.reduce((acc,ele)=> acc + ele ,0) ;
+
+// console.log(step3)
+
+// const result = account
+//   .map((ele) => ele * toTunisianDinar)
+//   .filter((ele) => ele > 0)
+//   .reduce((acc, ele) => acc + ele, 0);
+// console.log(result);
 
 
 
+/////////////// find /////////// 
+
+////// exemple 1 ::
+
+// const numbers = [10,20,30,40,20] ; 
+
+// const result = numbers.find((ele , i)=>{
+ 
+//   console.log(i+1 ,":",ele)
+//   return ele > 25
+// }  )
+
+// console.log(result)
+
+
+
+//// exemple 2 :::: 
+
+
+// const dataBase = [
+//   {
+//     userName : "peter" , 
+//     photo : "picture1" , 
+//     coins : 100
+//   } ,
+
+//     {
+//     userName : "mark" , 
+//     photo : "picture2" , 
+//     coins : 200
+//   } ,
+
+//     {
+//     userName : "sara" , 
+//     photo : "picture3" , 
+//     coins : 300
+//   }
+// ]
+
+// const winner = dataBase.find((person)=> person.coins === 200) ; 
+// console.log(winner)
