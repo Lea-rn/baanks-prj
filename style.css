@@ -231,3 +231,9 @@ footer {
 .logout-timer{
   font-weight: 600;
 }
+
+
+main {
+  opacity: 0;
+}
+

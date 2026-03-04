@@ -5,8 +5,6 @@ const account1 = {
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2,
   pin: 1111,
-  
-
 };
 
 const account2 = {
@@ -30,26 +28,50 @@ const account4 = {
   pin: 4444,
 };
 
-
-
-const accounts = [account1, account2, account3, account4 ];
+const accounts = [account1, account2, account3, account4];
 
 // console.log(accounts);
 
 ////// import elements :::
 
 const movementsContainer = document.querySelector(".left");
-const balance = document.querySelector(".amount") ; 
+const balance = document.querySelector(".amount");
 
-const inCome = document.querySelector(".average-in") ;
-const outCome = document.querySelector(".average-out") ;
-const int = document.querySelector(".average-interest")
+const inCome = document.querySelector(".average-in");
+const outCome = document.querySelector(".average-out");
+const int = document.querySelector(".average-interest");
 
+const btnLogin = document.querySelector(".btn-login");
+const userInput = document.querySelector(".user");
+const pinInput = document.querySelector(".pin");
+const welcomeMessage = document.querySelector(".welcome");
+const app = document.querySelector("main");
+
+///// transfert elements ::
+
+const transfertUser = document.querySelector(".transfert-input");
+const amountToTransfert = document.querySelector(".amount-transfert-box-input");
+const btnTransfert = document.querySelector(".btn-transfert-box");
+
+// let currentAccount = {
+//   owner: "jessica davis",
+//   movements: [5000, 3400, -150, -790, -3210, 1000, 8500, -30],
+//   interestRate: 1.5,
+//   pin: 2222,
+// };
+
+////// update ui functionnality :
+
+function updateUi(acc) {
+  dipalyMovements(acc);
+  dispalyBalance(acc);
+  calcDispalySummary(acc);
+}
 
 /////// display movements :::
-const dipalyMovements = function (arr) {
+const dipalyMovements = function (acc) {
   movementsContainer.innerHTML = "";
-  arr.forEach((mov, i) => {
+  acc.movements.forEach((mov, i) => {
     let type = mov > 0 ? "deposit" : "withdraw";
 
     let html = `
@@ -68,122 +90,121 @@ const dipalyMovements = function (arr) {
   });
 };
 
+// dipalyMovements(account2.movements);
 
+////// display balance :::
 
-dipalyMovements(account2.movements);
+const dispalyBalance = function (acc) {
+  const result = acc.movements.reduce((acc, ele) => acc + ele, 0);
+  ///// update ui ::
+  balance.textContent = `${result} €`;
+  currentAccount.credit = result;
+};
 
+// dispalyBalance(account2.movements);
 
+/////// credentials functionnality ::::
 
-////// display balance ::: 
+let currentAccount; ///// gloabl variable ;;
 
+btnLogin.addEventListener("click", function () {
+  currentAccount = accounts.find((acc) => acc.userName === userInput.value);
+  console.log("current account :", currentAccount);
+  if (currentAccount.pin === Number(pinInput.value)) {
+    welcomeMessage.textContent = `welcome back ${currentAccount.owner.split(" ")[0]}`;
+    app.style.opacity = 1;
+    ///// update ui :
+    updateUi(currentAccount);
+  } else {
+    alert("wrong password or email !!!!");
+  }
 
-const dispalyBalance = function(arr){
- const result  = arr.reduce((acc,ele)=> acc+ele , 0) ; 
- ///// update ui ::
- balance.textContent =  `${result} €` 
+  userInput.value = pinInput.value = "";
+});
 
-}
+///////// transfert box functionnality :::::
 
+///// conditions ::
+/////  balance > amount && reciever should be true && amount > 0 &&  current account should be defferent of reciever
 
-dispalyBalance(account2.movements)
+btnTransfert.addEventListener("click", function (event) {
+  event.preventDefault();
+  console.log("test");
 
+  // const balance = currentAccount.
+  const reciever = accounts.find((acc) => acc.userName === transfertUser.value);
+  console.log("reciever :", reciever);
+  const amount = Number(amountToTransfert.value);
+  const balance = currentAccount.credit;
+  console.log("test 2");
 
+  if (
+    balance >= amount &&
+    reciever &&
+    amount > 0 &&
+    currentAccount.userName !== reciever.userName
+  ) {
+    console.log("test 3");
+    currentAccount.movements.push(-amount);
+    reciever.movements.push(amount);
+    ///// update ui ;
 
-//////// userName functionnality :: 
+    updateUi(currentAccount);
+  }
 
+  transfertUser.value = amountToTransfert.value = "";
+});
 
-const displayUsername = function (arr){
-arr.forEach((person)=> person.userName = person.owner
-.toLowerCase().split(" ").map((ele)=> ele[0]).join("")
-)
-}
+//////// userName functionnality ::
 
-displayUsername(accounts)
-console.log(accounts)
+const displayUsername = function (arr) {
+  arr.forEach(
+    (person) =>
+      (person.userName = person.owner
+        .toLowerCase()
+        .split(" ")
+        .map((ele) => ele[0])
+        .join("")),
+  );
+};
 
+displayUsername(accounts);
 
-// const user = "MOHAMED JLASSI" ;   ////// mJ 
+//////// display summary ::
 
-//                  ///mohamed jlassi
-// const userName = user.toLowerCase().split(" ").map((ele)=> ele[0]).join("")
-// console.log(userName)
-
-
-
-
-//////// display summary :: 
-
-const calcDispalySummary = function (accountMovement){
-
+const calcDispalySummary = function (acc) {
   //// income
-const inc = accountMovement.filter((ele)=> ele >0).reduce((acc,ele)=> acc + ele ,0) ; 
-////// update ui ::: 
-inCome.textContent = `${inc} € `
+  const inc = acc.movements
+    .filter((ele) => ele > 0)
+    .reduce((acc, ele) => acc + ele, 0);
+  ////// update ui :::
+  inCome.textContent = `${inc} € `;
 
-///// outcome 
-const outc = accountMovement.filter((ele)=> ele < 0).reduce((acc,ele)=> acc + ele ,0) ; 
-outCome.textContent = `${Math.abs(outc)} €` ;
+  ///// outcome
+  const outc = acc.movements
+    .filter((ele) => ele < 0)
+    .reduce((acc, ele) => acc + ele, 0);
+  outCome.textContent = `${Math.abs(outc)} €`;
 
-///// interest :::
+  ///// interest :::
 
-// [5000, 3400, -150, -790, -3210, 1000, 8500, -30],
+  // [5000, 3400, -150, -790, -3210, 1000, 8500, -30],
 
-const intereset = accountMovement.filter((ele)=> ele > 0) //// [5000,3400,1000,8500]
-.map((deposit , i , arr)=>{
-console.log("comes from filter : " , arr)
-return (deposit*1.5)/100
-} ).reduce((acc,ele , i , arr )=>{
-  console.log("comes from map",arr)
-return  ele + acc
-} ,0)
+  const intereset = acc.movements
+    .filter((ele) => ele > 0) //// [5000,3400,1000,8500]
+    .map((deposit, i, arr) => {
+      return (deposit * 1.5) / 100;
+    })
+    .reduce((acc, ele, i, arr) => {
+      return ele + acc;
+    }, 0);
 
-////// update ui :
+  ////// update ui :
 
-int.textContent = `${intereset} €`
+  int.textContent = `${intereset} €`;
+};
 
-
-}
-
-
-
-calcDispalySummary(account2.movements)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// calcDispalySummary(account2.movements);
 
 ////////////////// lecture :::
 
@@ -350,46 +371,41 @@ calcDispalySummary(account2.movements)
 //   .reduce((acc, ele) => acc + ele, 0);
 // console.log(result);
 
-
-
-/////////////// find /////////// 
+/////////////// find ///////////
 
 ////// exemple 1 ::
 
-// const numbers = [10,20,30,40,20] ; 
+// const numbers = [10,20,30,40,20] ;
 
 // const result = numbers.find((ele , i)=>{
- 
+
 //   console.log(i+1 ,":",ele)
 //   return ele > 25
 // }  )
 
 // console.log(result)
 
-
-
-//// exemple 2 :::: 
-
+//// exemple 2 ::::
 
 // const dataBase = [
 //   {
-//     userName : "peter" , 
-//     photo : "picture1" , 
+//     userName : "peter" ,
+//     photo : "picture1" ,
 //     coins : 100
 //   } ,
 
 //     {
-//     userName : "mark" , 
-//     photo : "picture2" , 
+//     userName : "mark" ,
+//     photo : "picture2" ,
 //     coins : 200
 //   } ,
 
 //     {
-//     userName : "sara" , 
-//     photo : "picture3" , 
+//     userName : "sara" ,
+//     photo : "picture3" ,
 //     coins : 300
 //   }
 // ]
 
-// const winner = dataBase.find((person)=> person.coins === 200) ; 
+// const winner = dataBase.find((person)=> person.coins === 200) ;
 // console.log(winner)
