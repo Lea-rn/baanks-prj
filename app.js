@@ -53,6 +53,18 @@ const transfertUser = document.querySelector(".transfert-input");
 const amountToTransfert = document.querySelector(".amount-transfert-box-input");
 const btnTransfert = document.querySelector(".btn-transfert-box");
 
+////// loan elements ::
+
+const amountToLoanInput = document.querySelector(".amount-loan-box-input");
+const btnLoan = document.querySelector(".btn-loan-box");
+
+///// close elements ::
+
+const closeInput = document.querySelector(".close-input");
+const closePinInput = document.querySelector(".pin-input");
+
+const btnClose = document.querySelector(".btn-close-box");
+
 // let currentAccount = {
 //   owner: "jessica davis",
 //   movements: [5000, 3400, -150, -790, -3210, 1000, 8500, -30],
@@ -110,6 +122,13 @@ let currentAccount; ///// gloabl variable ;;
 btnLogin.addEventListener("click", function () {
   currentAccount = accounts.find((acc) => acc.userName === userInput.value);
   console.log("current account :", currentAccount);
+
+  if (!currentAccount) {
+    alert("this account was deleted !!! ");
+    userInput.value = pinInput.value = "";
+    return;
+  }
+
   if (currentAccount.pin === Number(pinInput.value)) {
     welcomeMessage.textContent = `welcome back ${currentAccount.owner.split(" ")[0]}`;
     app.style.opacity = 1;
@@ -153,6 +172,51 @@ btnTransfert.addEventListener("click", function (event) {
   }
 
   transfertUser.value = amountToTransfert.value = "";
+});
+
+////////////// loan functionnality :::
+
+btnLoan.addEventListener("click", function (event) {
+  event.preventDefault();
+  const amount = Number(amountToLoanInput.value);
+  if (
+    amount > 0 &&
+    amount &&
+    currentAccount.movements.some((mov) => mov / 10 > amount)
+  ) {
+    currentAccount.movements.push(amount);
+    ////////// update ui :::
+    updateUi(currentAccount);
+    amountToLoanInput.value = "";
+  }
+});
+
+///////// close functionnality :::
+
+btnClose.addEventListener("click", function (event) {
+  event.preventDefault();
+  const accountToClose = closeInput.value; ///// userName to delete ;
+  const accountPinToClose = Number(closePinInput.value);
+
+  if (
+    currentAccount.userName === accountToClose &&
+    currentAccount.pin === accountPinToClose
+  ) {
+    const validation = confirm(
+      "are you sure !! you want to delete this account !!! ",
+    );
+    if (validation) {
+      const index = accounts.findIndex(
+        (obj) => obj.userName === accountToClose,
+      );
+      accounts.splice(index, 1);
+      app.style.opacity = 0;
+      welcomeMessage.textContent = "Log in to get started";
+    }
+  } else {
+    closeInput.value = closePinInput.value = "";
+    alert("userName or pin are wrong !!! please try again ...");
+  }
 });
 
 //////// userName functionnality ::
@@ -206,7 +270,7 @@ const calcDispalySummary = function (acc) {
 
 // calcDispalySummary(account2.movements);
 
-////////////////// lecture :::
+////////////////// lecture :::   //// findIndexof().....
 
 ////////// section ::: data transformation :::
 
@@ -409,3 +473,37 @@ const calcDispalySummary = function (acc) {
 
 // const winner = dataBase.find((person)=> person.coins === 200) ;
 // console.log(winner)
+
+//////// indexOf ::
+
+// const arr = [1, 23, 4];
+
+// console.log(arr.indexOf(23));
+
+///// findIndex() ::
+
+// const arr = [1, 23, 4,23,50];
+
+// const index = arr.findIndex((ele) => ele === 23);
+// console.log(index);
+
+/////// includes ::
+
+// const numbres = [20, 22, 50, 100, 150];
+// console.log(numbres.includes(110));
+
+////// some :::
+
+// const numbres = [20, 22, 50, 100, 150];
+
+// const result = numbres.some((ele) => ele > 150); ////// fama number akber me 80 !!
+
+// console.log(result);
+
+///// every ::
+
+// const numbres = [20, 22, 50, 100, 150];    ////// every number akber me 60 !!!!!
+
+// const x = numbres.every((ele) => ele > 60);
+
+// console.log(x);
